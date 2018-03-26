@@ -2,7 +2,7 @@ from pwn import *
 import sys
 
 if len(sys.argv) < 2:
-    print "usage: python leakyleak.py <binary> [address_to_print]"
+    print "usage: python leakyleak.py <binary> [address_of_pointer_to_leak]"
     exit(1)
 
 to_leak = None
@@ -10,7 +10,7 @@ if len(sys.argv) > 2:
     try:
         to_leak = int(sys.argv[2], 16)
     except:
-        print "error: address to leak must be and exadecimal number"
+        print "error: the address of the pointer to leak must be an exadecimal number"
         exit(1)
 
 binary = ELF(sys.argv[1])
