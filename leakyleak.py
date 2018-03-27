@@ -151,7 +151,7 @@ elif "stdout" in binary.symbols:
         print "rop += p64(0) # r13"
         print "rop += p64(0) # r14"
         print "rop += p64(0) # r15"
-    elif "_fputs_unlocked" in binary.got:_fputs_unlocked
+    elif "_fputs_unlocked" in binary.got:
         print "[*] using `_fputs_unlocked` to print the leak"
         print
         # fputs(stdout, &fputs)
