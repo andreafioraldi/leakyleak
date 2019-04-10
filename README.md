@@ -1,5 +1,5 @@
 # leakyleak
-a POC for the libc address leak using __libc_csu_init from the paper https://www.blackhat.com/docs/asia-18/asia-18-Marco-return-to-csu-a-new-method-to-bypass-the-64-bit-Linux-ASLR-wp.pdf
+a POC for the libc address leak using __libc_csu_init from the paper https://i.blackhat.com/briefings/asia/2018/asia-18-Marco-return-to-csu-a-new-method-to-bypass-the-64-bit-Linux-ASLR-wp.pdf
 
 ## Usage
 ```
